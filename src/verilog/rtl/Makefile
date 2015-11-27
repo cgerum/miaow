@@ -35,6 +35,7 @@ fpga: build
 	cp simf/build/* fpga_core/
 	cp rfa/build/* fpga_core/
 	cp alu/build/* fpga_core/
+	./fpga_make.sh
 	cp fpga/* fpga_core/
 
 compile: build
@@ -56,7 +57,7 @@ check:
 	cd wavepool && make clean && make compile
 	cd simf && make clean && make compile
 	cd rfa && make clean && make compile
-	#cd alu && make clean && make compile
+	cd alu && make clean && make compile
 	make compile
 
 unbuild:
@@ -96,7 +97,7 @@ uncheck:
 	cd simf && make clean
 	cd rfa && make clean
 	cd dispatcher && make clean
-	#cd alu && make clean
+	cd alu && make clean
 
 clean: unbuild uncheck
 	rm -rf csrc/ simv simv.daidir/ compile.log
