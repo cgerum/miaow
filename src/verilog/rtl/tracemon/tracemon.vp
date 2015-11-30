@@ -1,11 +1,9 @@
-extern "C" void InitializeTraceMon(int cuid);
+/*extern "C" void InitializeTraceMon(int cuid);
 extern "C" void SetKernelId(int kernel_id);
-
 extern "C" void AddBases(int cuid, int wf, int sbase, int vbase, int lbase);
 extern "C" int GetSgprBase(int cuid, int wf);
 extern "C" int GetVgprBase(int cuid, int wf);
 extern "C" int GetLdsBase(int cuid, int wf);
-
 extern "C" void AddNewWavefront(int cuid, int tag, int wf);
 extern "C" void AddInstruction(int cuid, int wf, int pc, int is64,
 	int instr_lo, int instr_hi, int isBarrier, int timestamp);
@@ -13,7 +11,6 @@ extern "C" void PrintAndDelete(int cuid, int wf, int pc);
 extern "C" void PrintAndDeleteOnBranch(int cuid, int wf, int pc, int taken);
 extern "C" void PrintAndDeleteBarrier(int cuid, int wf);
 extern "C" void PrintAndDeleteAll(int cuid, int wf);
-
 extern "C" void PrintVgpr(int cuid, int wf, int pc, int tid, int r, int value);
 extern "C" void PrintVgprWithVcc(int cuid, int wf, int pc, int tid, int r, int value, int vcc);
 extern "C" void PrintVVcc(int cuid, int wf, int pc, int tid, int vcc);
@@ -35,7 +32,9 @@ extern "C" void PrintM0(int cuid, int wf, int pc, int val);
 extern "C" void PrintExecWithScc(int cuid, int wf, int pc, int sel, int hival, int loval, int scc);
 extern "C" void PrintVccWithScc(int cuid, int wf, int pc, int sel, int hival, int loval, int scc);
 extern "C" void PrintM0WithScc(int cuid, int wf, int pc, int val, int scc);
-extern "C" void PrintEndLine(int cuid, int wf, int pc);
+extern "C" void PrintEndLine(int cuid, int wf, int pc);*/
+
+
 
 module tracemon(
 	issue2tracemon_barrier_retire_en,
@@ -278,6 +277,42 @@ integer wfid, pc;
 
 reg rst_buff;
 reg [5:0] lsu_wfid;
+
+import "DPI-C" function  void InitializeTraceMon(int cuid);
+import "DPI-C" function  void SetKernelId(int kernel_id);
+import "DPI-C" function  void AddBases(int cuid, int wf, int sbase, int vbase, int lbase);
+import "DPI-C" function  int GetSgprBase(int cuid, int wf);
+import "DPI-C" function  int GetVgprBase(int cuid, int wf);
+import "DPI-C" function  int GetLdsBase(int cuid, int wf);
+import "DPI-C" function  void AddNewWavefront(int cuid, int tag, int wf);
+import "DPI-C" function  void AddInstruction(int cuid, int wf, int pc, int is64,
+	int instr_lo, int instr_hi, int isBarrier, int timestamp);
+import "DPI-C" function  void PrintAndDelete(int cuid, int wf, int pc);
+import "DPI-C" function  void PrintAndDeleteOnBranch(int cuid, int wf, int pc, int taken);
+import "DPI-C" function  void PrintAndDeleteBarrier(int cuid, int wf);
+import "DPI-C" function  void PrintAndDeleteAll(int cuid, int wf);
+import "DPI-C" function  void PrintVgpr(int cuid, int wf, int pc, int tid, int r, int value);
+import "DPI-C" function  void PrintVgprWithVcc(int cuid, int wf, int pc, int tid, int r, int value, int vcc);
+import "DPI-C" function  void PrintVVcc(int cuid, int wf, int pc, int tid, int vcc);
+import "DPI-C" function  void PrintVSgpr(int cuid, int wf, int pc, int tid, int r, int value);
+import "DPI-C" function  void PrintVgprF(int cuid, int wf, int pc, int tid, int r, int value);
+import "DPI-C" function  void PrintVgprFWithVcc(int cuid, int wf, int pc, int tid, int r, int value, int vcc);
+import "DPI-C" function  void PrintSgpr(int cuid, int wf, int pc, int sel, int r, int hival, int loval);
+import "DPI-C" function  void PrintScc(int cuid, int wf, int pc, int value);
+import "DPI-C" function  void PrintSgprWithScc(int cuid, int wf, int pc, int sel, int r, int hival, int loval, int scc);
+import "DPI-C" function  void PrintSgprExecScc(int cuid, int wf, int pc, int r, int shival, int sloval, int ehival, int eloval, int scc);
+import "DPI-C" function  void PrintVgprLoad(int cuid, int wf, int pc, int tid, int r, int addr, int value);
+import "DPI-C" function  void PrintVgprLoadDS(int cuid, int wf, int pc, int tid, int r, int addr, int value);
+import "DPI-C" function  void PrintSgprLoad(int cuid, int wf, int pc, int addr, int r, int value);
+import "DPI-C" function  void PrintVgprStore(int cuid, int wf, int pc, int tid, int addr, int r, int value);
+import "DPI-C" function  void PrintVgprStoreDS(int cuid, int wf, int pc, int tid, int addr, int r, int value);
+import "DPI-C" function  void PrintExec(int cuid, int wf, int pc, int sel, int hival, int loval);
+import "DPI-C" function  void PrintVcc(int cuid, int wf, int pc, int sel, int hival, int loval);
+import "DPI-C" function  void PrintM0(int cuid, int wf, int pc, int val);
+import "DPI-C" function  void PrintExecWithScc(int cuid, int wf, int pc, int sel, int hival, int loval, int scc);
+import "DPI-C" function  void PrintVccWithScc(int cuid, int wf, int pc, int sel, int hival, int loval, int scc);
+import "DPI-C" function  void PrintM0WithScc(int cuid, int wf, int pc, int val, int scc);
+import "DPI-C" function  void PrintEndLine(int cuid, int wf, int pc);
 
 // not doing anything with rst for now
 always @ (rst)

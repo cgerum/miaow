@@ -1,3 +1,4 @@
+/*
 extern "C" int ScheduleWavefront();
 extern "C" void DescheduleWavefront(int cuid, int wfTag);
 extern "C" int getTotalWavefronts();
@@ -22,6 +23,7 @@ extern "C" int getSregValue(int index);
 extern "C" void setVregValue(int cuid, int thrd, int vreg, int bitnum, int value);
 extern "C" void setSregValue(int cuid, int sreg, int bitnum, int value);
 extern "C" int getPC();
+ */
 
 module dispatcher_soft (/*AUTOARG*/
    // Outputs
@@ -68,6 +70,33 @@ module dispatcher_soft (/*AUTOARG*/
    
    
 
+import "DPI-C" function int ScheduleWavefront();
+import "DPI-C" function void DescheduleWavefront(int cuid, int wfTag);
+import "DPI-C" function int getTotalWavefronts();
+import "DPI-C" function int getCuId();
+//import "DPI-C" function int getWgId();
+//import "DPI-C" function int getWfId();
+import "DPI-C" function int getWfTag();
+import "DPI-C" function int getWfCnt();
+import "DPI-C" function int getWfNumThrds();
+import "DPI-C" function int getVregBase();
+import "DPI-C" function int getVregSize();
+import "DPI-C" function int getSregBase();
+import "DPI-C" function int getSregSize();
+import "DPI-C" function int getLdsBase();
+import "DPI-C" function int getLdsSize();
+import "DPI-C" function int getSetVregs();
+import "DPI-C" function int getVregKey(int index, int thrd);
+import "DPI-C" function int getVregValue(int index, int thrd);
+import "DPI-C" function int getSetSregs();
+import "DPI-C" function int getSregKey(int index);
+import "DPI-C" function int getSregValue(int index);
+import "DPI-C" function void setVregValue(int cuid, int thrd, int vreg, int bitnum, int value);
+import "DPI-C" function void setSregValue(int cuid, int sreg, int bitnum, int value);
+import "DPI-C" function int getPC();
+
+
+   
 
    always @ (posedge clk) begin
       if (rst) begin

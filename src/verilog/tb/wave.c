@@ -1,3 +1,5 @@
+#include "dpiheader.h"
+
 #include "wave.h"
 
 int NUM_OF_CU = 0;

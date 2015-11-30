@@ -1,0 +1,5 @@
+#!/bin/sh
+
+vlog  +libext+.v  ../rtl/common/global_definitions.v ../rtl/common/issue_definitions.v ../rtl/alu/alu_definitions.v ../rtl/lsu/lsu_definitions.v ../rtl/decode/decode_definitions.v *.v  ./dispatcher_wrapper/*.v  ../rtl/compute_unit/build/*.v ../rtl/decode/build/*.v ../rtl/exec/build/*.v ../rtl/fetch/build/*.v ../rtl/instr_buffer/build/*.v ../rtl/issue/build/*.v ../rtl/lsu/build/*.v ../rtl/memory/build/*.v ../rtl/salu/build/*.v ../rtl/sgpr/build/*.v ../rtl/alu/build/*.v ../rtl/simd/build/*.v ../rtl/simf/build/*.v ../rtl/rfa/build/*.v ../rtl/tracemon/build/*.v ../rtl/vgpr/build/*.v ../rtl/wavepool/build/*.v ../rtl/dispatcher/build/*.v  ../rtl/common/build/*.v +lint=all -timescale=1ns/1ns -l compile.log  +v2k -64 -sv -vopt -mfcu -dpiheader  dpiheader.h
+
+vlog *.c ../rtl/memory/*.c ../rtl/tracemon/*.c 

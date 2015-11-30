@@ -1,4 +1,4 @@
-extern "C" void InitializeProfiler(int cuid);
+/*extern "C" void InitializeProfiler(int cuid);
 extern "C" void StartSALUExec(int cuid, int tstamp);
 extern "C" void StartVALUExec(int cuid, int tstamp);
 extern "C" void StartMemExec(int cuid, int tstamp);
@@ -13,7 +13,7 @@ extern "C" void WavepoolQProfileOut(int cuid);
 extern "C" void ValuQAdd(int cuid, int qid);
 extern "C" void ValuQRemove(int cuid, int qid);
 extern "C" void ValuQProfile(int cuid);
-extern "C" void ValuQProfileOut(int cuid);
+extern "C" void ValuQProfileOut(int cuid);*/
 
 module profiler(
 	salu2sgpr_instr_done,
@@ -61,6 +61,24 @@ reg [7:0] wrback;
 
 integer i, profCnt;
 
+import "DPI-C" function  void InitializeProfiler(int cuid);
+import "DPI-C" function  void StartSALUExec(int cuid, int tstamp);
+import "DPI-C" function  void StartVALUExec(int cuid, int tstamp);
+import "DPI-C" function  void StartMemExec(int cuid, int tstamp);
+import "DPI-C" function  void FinishSALUExec(int cuid, int tstamp);
+import "DPI-C" function  void FinishVALUExec(int cuid, int tstamp);
+import "DPI-C" function  void FinishMemExec(int cuid, int tstamp);
+import "DPI-C" function  void WavepoolQAdd(int cuid, int qid);
+import "DPI-C" function  void WavepoolQRemove(int cuid, int qid);
+import "DPI-C" function  void WavepoolQReset(int cuid, int qid);
+import "DPI-C" function  void WavepoolQProfile(int cuid);
+import "DPI-C" function  void WavepoolQProfileOut(int cuid);
+import "DPI-C" function  void ValuQAdd(int cuid, int qid);
+import "DPI-C" function  void ValuQRemove(int cuid, int qid);
+import "DPI-C" function  void ValuQProfile(int cuid);
+import "DPI-C" function  void ValuQProfileOut(int cuid);
+      
+   
 initial begin
 	InitializeProfiler(CUID);
 	wrback = 8'hFF;

@@ -1,7 +1,9 @@
+#include "dpiheader.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+
 
 #define MAX_NUM_OF_CU 4
 #define MAX_WF_IN_CU 40

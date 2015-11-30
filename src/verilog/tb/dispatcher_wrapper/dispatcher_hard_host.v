@@ -1,4 +1,4 @@
-extern "C" int checkWgAvailable();
+/*extern "C" int checkWgAvailable();
 extern "C" void prepareNextWg();
 extern "C" int hardDisGetWgId();
 extern "C" int hardDisGetWfCnt();
@@ -9,7 +9,7 @@ extern "C" int hardDisGetSregSize()    ;
 extern "C" int hardDisGetSregSizePerWf();
 extern "C" int hardDisGetLdsSize();
 extern "C" int hardDisGetGdsSize();
-extern "C" int hardDisGetPc();
+extern "C" int hardDisGetPc();*/
 
 
 module dispatcher_hard_host (/*AUTOARG*/
@@ -67,6 +67,19 @@ module dispatcher_hard_host (/*AUTOARG*/
    reg [MEM_ADDR_WIDTH-1:0]   host_start_pc_i;   
 
    reg                        initialized;
+
+   import "DPI-C" function  int checkWgAvailable();
+   import "DPI-C" function  void prepareNextWg();
+   import "DPI-C" function  int hardDisGetWgId();
+   import "DPI-C" function  int hardDisGetWfCnt();
+   import "DPI-C" function  int hardDisGetWfNumThrds();
+   import "DPI-C" function  int hardDisGetVregSize();
+   import "DPI-C" function  int hardDisGetVregSizePerWf();
+   import "DPI-C" function  int hardDisGetSregSize()    ;
+   import "DPI-C" function  int hardDisGetSregSizePerWf();
+   import "DPI-C" function  int hardDisGetLdsSize();
+   import "DPI-C" function  int hardDisGetGdsSize();
+   import "DPI-C" function  int hardDisGetPc();
    
    always @ (  posedge clk or posedge rst  ) begin
       if(rst) begin
