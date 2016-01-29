@@ -3,18 +3,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 #include <string.h>
 
 #define MAX_IMM_VAL 50
 
-FILE *config_file;
-FILE *instrmem_file;
-FILE *datamem_file;
-
 // populate according to commandline values
 // only one variable of this type
-struct //_configValues
+struct _configValues
 {
 	int scalar_alu;
 	int vector_alu;
@@ -35,7 +33,7 @@ struct //_configValues
 
 	int test_count;
 	int unit_tests;
-} configs;
+} typedef configValues;
 
 void printInstruction32(void* instr);
 void printInstruction64(void* instr);
